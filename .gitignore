@@ -1,0 +1,10 @@
+notepad .gitignore
+```
+
+Copia y pega esto:
+```
+.n8n/
+node_modules/
+*.log
+.env
+.DS_Store
