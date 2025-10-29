@@ -1,12 +1,12 @@
 services:
   - type: web
     name: n8n-incaneurobaeza
-    env: docker
+    runtime: docker
     plan: free
     dockerfilePath: ./Dockerfile
     envVars:
       - key: N8N_BASIC_AUTH_ACTIVE
-        value: true
+        value: "true"
       - key: N8N_BASIC_AUTH_USER
         value: admin
       - key: N8N_BASIC_AUTH_PASSWORD
@@ -14,10 +14,12 @@ services:
       - key: N8N_HOST
         value: 0.0.0.0
       - key: N8N_PORT
-        value: 5678
+        value: "5678"
       - key: N8N_PROTOCOL
         value: https
       - key: WEBHOOK_URL
         value: https://n8n-incaneurobaeza.onrender.com
       - key: GENERIC_TIMEZONE
+        value: America/Bogota
+      - key: TZ
         value: America/Bogota
