@@ -1,5 +1,6 @@
 FROM n8nio/n8n:latest
 
+# Variables de entorno
 ENV N8N_HOST=0.0.0.0
 ENV N8N_PORT=5678
 ENV N8N_PROTOCOL=https
@@ -7,7 +8,10 @@ ENV NODE_ENV=production
 ENV EXECUTIONS_DATA_SAVE_ON_ERROR=all
 ENV EXECUTIONS_DATA_SAVE_ON_SUCCESS=all
 ENV EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS=true
+ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
+# Exponer puerto
 EXPOSE 5678
 
-CMD ["n8n", "start"]
+# Comando de inicio corregido
+CMD ["node", "/usr/local/bin/n8n"]
