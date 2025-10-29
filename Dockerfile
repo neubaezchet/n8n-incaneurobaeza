@@ -1,6 +1,7 @@
-FROM n8nio/n8n:latest
+FROM docker.n8n.io/n8nio/n8n:latest
 
-# Variables de entorno
+USER root
+
 ENV N8N_HOST=0.0.0.0
 ENV N8N_PORT=5678
 ENV N8N_PROTOCOL=https
@@ -8,10 +9,10 @@ ENV NODE_ENV=production
 ENV EXECUTIONS_DATA_SAVE_ON_ERROR=all
 ENV EXECUTIONS_DATA_SAVE_ON_SUCCESS=all
 ENV EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS=true
-ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 
-# Exponer puerto
 EXPOSE 5678
 
-# Comando de inicio corregido
-CMD ["node", "/usr/local/bin/n8n"]
+USER node
+
+CMD ["n8n"]
