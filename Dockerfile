@@ -1,7 +1,21 @@
-FROM docker.n8n.io/n8nio/n8n:latest
+FROM node:18-alpine
 
-USER root
+# Instalar dependencias del sistema
+RUN apk add --no-cache \
+    python3 \
+    py3-pip \
+    git \
+    openssh-client \
+    ca-certificates \
+    curl
 
+# Instalar n8n globalmente
+RUN npm install -g n8n
+
+# Crear directorio de trabajo
+WORKDIR /home/node
+
+# Variables de entorno
 ENV N8N_HOST=0.0.0.0
 ENV N8N_PORT=5678
 ENV N8N_PROTOCOL=https
@@ -11,8 +25,8 @@ ENV EXECUTIONS_DATA_SAVE_ON_SUCCESS=all
 ENV EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS=true
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 
+# Exponer puerto
 EXPOSE 5678
 
-USER node
-
+# Comando de inicio
 CMD ["n8n"]
