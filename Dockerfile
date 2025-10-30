@@ -1,3 +1,4 @@
+# Dockerfile
 FROM node:18-alpine
 
 # Instalar dependencias del sistema
@@ -28,5 +29,5 @@ ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 # Exponer puerto
 EXPOSE 5678
 
-# Comando de inicio
-CMD ["n8n"]
+# Comando de inicio corregido
+CMD ["n8n", "start"]
