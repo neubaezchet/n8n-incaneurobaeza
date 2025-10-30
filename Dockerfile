@@ -1,20 +1,11 @@
-# Dockerfile
-FROM node:18-alpine
+# Usar imagen oficial completa de n8n
+FROM n8nio/n8n:latest
 
-# Instalar dependencias del sistema
-RUN apk add --no-cache \
-    python3 \
-    py3-pip \
-    git \
-    openssh-client \
-    ca-certificates \
-    curl
+# Cambiar a usuario root para configuración
+USER root
 
-# Instalar n8n globalmente
-RUN npm install -g n8n
-
-# Crear directorio de trabajo
-WORKDIR /home/node
+# Crear directorio de trabajo si no existe
+RUN mkdir -p /home/node/.n8n && chown -R node:node /home/node
 
 # Variables de entorno
 ENV N8N_HOST=0.0.0.0
@@ -26,8 +17,12 @@ ENV EXECUTIONS_DATA_SAVE_ON_SUCCESS=all
 ENV EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS=true
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
 
+# Volver a usuario node
+USER node
+
 # Exponer puerto
 EXPOSE 5678
 
-# Comando de inicio corregido
-CMD ["n8n", "start"]
+# Workaround: usar tini + n8n directamente
+ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
+CMD []
