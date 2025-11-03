@@ -8,7 +8,6 @@ USER root
 RUN mkdir -p /home/node/.n8n && chown -R node:node /home/node
 
 # Variables de entorno
-ENV N8N_HOST=0.0.0.0
 ENV N8N_PORT=5678
 ENV N8N_PROTOCOL=https
 ENV NODE_ENV=production
@@ -26,3 +25,14 @@ EXPOSE 5678
 # Workaround: usar tini + n8n directamente
 ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
 CMD []
+```
+
+---
+
+**📄 .gitignore:**
+```
+.n8n/
+node_modules/
+*.log
+.env
+.DS_Store

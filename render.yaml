@@ -12,12 +12,14 @@ services:
       - key: N8N_BASIC_AUTH_PASSWORD
         generateValue: true
       - key: N8N_HOST
-        value: 0.0.0.0
+        value: n8n-incaneurobaeza.onrender.com
       - key: N8N_PORT
         value: "5678"
       - key: N8N_PROTOCOL
         value: https
       - key: WEBHOOK_URL
+        value: https://n8n-incaneurobaeza.onrender.com
+      - key: N8N_EDITOR_BASE_URL
         value: https://n8n-incaneurobaeza.onrender.com
       - key: GENERIC_TIMEZONE
         value: America/Bogota
