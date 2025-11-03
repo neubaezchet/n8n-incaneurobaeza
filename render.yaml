@@ -19,15 +19,15 @@ services:
       - key: N8N_PORT
         value: "10000"
       
-      # Host Configuration
+      # Host Configuration - IMPORTANTE
       - key: N8N_HOST
         value: n8n-incaneurobaeza.onrender.com
       - key: N8N_PROTOCOL
         value: https
       - key: WEBHOOK_URL
-        value: https://n8n-incaneurobaeza.onrender.com
+        value: https://n8n-incaneurobaeza.onrender.com/
       - key: N8N_EDITOR_BASE_URL
-        value: https://n8n-incaneurobaeza.onrender.com
+        value: https://n8n-incaneurobaeza.onrender.com/
       
       # Timezone
       - key: GENERIC_TIMEZONE
