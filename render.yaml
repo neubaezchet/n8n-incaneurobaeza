@@ -5,23 +5,68 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
     envVars:
+      # Authentication
       - key: N8N_BASIC_AUTH_ACTIVE
         value: "true"
       - key: N8N_BASIC_AUTH_USER
         value: admin
       - key: N8N_BASIC_AUTH_PASSWORD
         generateValue: true
+      
+      # Render Port Configuration
+      - key: PORT
+        value: "10000"
+      - key: N8N_PORT
+        value: "10000"
+      
+      # Host Configuration
       - key: N8N_HOST
         value: n8n-incaneurobaeza.onrender.com
-      - key: N8N_PORT
-        value: "5678"
       - key: N8N_PROTOCOL
         value: https
       - key: WEBHOOK_URL
         value: https://n8n-incaneurobaeza.onrender.com
       - key: N8N_EDITOR_BASE_URL
         value: https://n8n-incaneurobaeza.onrender.com
+      
+      # Timezone
       - key: GENERIC_TIMEZONE
         value: America/Bogota
       - key: TZ
         value: America/Bogota
+      
+      # Database Configuration (fix deprecation warnings)
+      - key: DB_TYPE
+        value: sqlite
+      - key: DB_SQLITE_POOL_SIZE
+        value: "3"
+      
+      # Task Runners (fix deprecation warning)
+      - key: N8N_RUNNERS_ENABLED
+        value: "true"
+      
+      # Security Settings (fix deprecation warnings)
+      - key: N8N_BLOCK_ENV_ACCESS_IN_NODE
+        value: "false"
+      - key: N8N_GIT_NODE_DISABLE_BARE_REPOS
+        value: "true"
+      
+      # Execution Settings
+      - key: EXECUTIONS_DATA_SAVE_ON_ERROR
+        value: all
+      - key: EXECUTIONS_DATA_SAVE_ON_SUCCESS
+        value: all
+      - key: EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS
+        value: "true"
+      - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
+        value: "false"
+      
+      # Production Settings
+      - key: NODE_ENV
+        value: production
+    
+    # Disk for persistent storage
+    disk:
+      name: n8n-data
+      mountPath: /home/node/.n8n
+      sizeGB: 1
