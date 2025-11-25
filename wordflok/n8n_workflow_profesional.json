@@ -1,0 +1,561 @@
+{
+  "name": "IncaNeurobaeza - Notificaciones (PROFESIONAL)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "incapacidades",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-principal",
+      "name": "Webhook Incapacidades",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [240, 460],
+      "webhookId": "incapacidades"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.tipo_notificacion}}",
+              "operation": "equals",
+              "value2": "confirmacion"
+            }
+          ]
+        }
+      },
+      "id": "if-confirmacion",
+      "name": "¿Confirmación?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 200]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.tipo_notificacion}}",
+              "operation": "equals",
+              "value2": "incompleta"
+            }
+          ]
+        }
+      },
+      "id": "if-incompleta",
+      "name": "¿Incompleta?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 340]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.tipo_notificacion}}",
+              "operation": "equals",
+              "value2": "ilegible"
+            }
+          ]
+        }
+      },
+      "id": "if-ilegible",
+      "name": "¿Ilegible?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 480]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.tipo_notificacion}}",
+              "operation": "equals",
+              "value2": "completa"
+            }
+          ]
+        }
+      },
+      "id": "if-completa",
+      "name": "¿Completa?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 620]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.tipo_notificacion}}",
+              "operation": "equals",
+              "value2": "eps"
+            }
+          ]
+        }
+      },
+      "id": "if-eps",
+      "name": "¿EPS?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 760]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.tipo_notificacion}}",
+              "operation": "equals",
+              "value2": "tthh"
+            }
+          ]
+        }
+      },
+      "id": "if-tthh",
+      "name": "¿TTHH?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 900]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.tipo_notificacion}}",
+              "operation": "equals",
+              "value2": "extra"
+            }
+          ]
+        }
+      },
+      "id": "if-extra",
+      "name": "¿Extra?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 1040]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.tipo_notificacion}}",
+              "operation": "equals",
+              "value2": "recordatorio"
+            }
+          ]
+        }
+      },
+      "id": "if-recordatorio",
+      "name": "¿Recordatorio?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 1180]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.tipo_notificacion}}",
+              "operation": "equals",
+              "value2": "alerta_jefe"
+            }
+          ]
+        }
+      },
+      "id": "if-alerta-jefe",
+      "name": "¿Alerta Jefe?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [460, 1320]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "sendTo": "={{$json.email}}",
+        "subject": "={{$json.subject}}",
+        "emailType": "html",
+        "message": "={{$json.html_content}}",
+        "options": {
+          "ccList": "={{$json.cc_email}}"
+        }
+      },
+      "id": "gmail-confirmacion",
+      "name": "Gmail Confirmación",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [720, 200],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MgSEO7z6UhL4BcfX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "sendTo": "={{$json.email}}",
+        "subject": "={{$json.subject}}",
+        "emailType": "html",
+        "message": "={{$json.html_content}}",
+        "options": {
+          "ccList": "={{$json.cc_email}}"
+        }
+      },
+      "id": "gmail-incompleta",
+      "name": "Gmail Incompleta",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [720, 340],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MgSEO7z6UhL4BcfX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "sendTo": "={{$json.email}}",
+        "subject": "={{$json.subject}}",
+        "emailType": "html",
+        "message": "={{$json.html_content}}",
+        "options": {
+          "ccList": "={{$json.cc_email}}"
+        }
+      },
+      "id": "gmail-ilegible",
+      "name": "Gmail Ilegible",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [720, 480],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MgSEO7z6UhL4BcfX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "sendTo": "={{$json.email}}",
+        "subject": "={{$json.subject}}",
+        "emailType": "html",
+        "message": "={{$json.html_content}}",
+        "options": {
+          "ccList": "={{$json.cc_email}}"
+        }
+      },
+      "id": "gmail-completa",
+      "name": "Gmail Completa",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [720, 620],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MgSEO7z6UhL4BcfX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "sendTo": "={{$json.email}}",
+        "subject": "={{$json.subject}}",
+        "emailType": "html",
+        "message": "={{$json.html_content}}",
+        "options": {
+          "ccList": "={{$json.cc_email}}"
+        }
+      },
+      "id": "gmail-eps",
+      "name": "Gmail EPS",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [720, 760],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MgSEO7z6UhL4BcfX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "sendTo": "={{$json.email}}",
+        "subject": "={{$json.subject}}",
+        "emailType": "html",
+        "message": "={{$json.html_content}}",
+        "options": {}
+      },
+      "id": "gmail-tthh",
+      "name": "Gmail TTHH",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [720, 900],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MgSEO7z6UhL4BcfX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "sendTo": "={{$json.email}}",
+        "subject": "={{$json.subject}}",
+        "emailType": "html",
+        "message": "={{$json.html_content}}",
+        "options": {
+          "ccList": "={{$json.cc_email}}"
+        }
+      },
+      "id": "gmail-extra",
+      "name": "Gmail Extra",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [720, 1040],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MgSEO7z6UhL4BcfX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "sendTo": "={{$json.email}}",
+        "subject": "={{$json.subject}}",
+        "emailType": "html",
+        "message": "={{$json.html_content}}",
+        "options": {
+          "ccList": "={{$json.cc_email}}"
+        }
+      },
+      "id": "gmail-recordatorio",
+      "name": "Gmail Recordatorio",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [720, 1180],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MgSEO7z6UhL4BcfX",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "sendTo": "={{$json.email}}",
+        "subject": "={{$json.subject}}",
+        "emailType": "html",
+        "message": "={{$json.html_content}}",
+        "options": {}
+      },
+      "id": "gmail-alerta-jefe",
+      "name": "Gmail Alerta Jefe",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [720, 1320],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MgSEO7z6UhL4BcfX",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Incapacidades": {
+      "main": [
+        [
+          {
+            "node": "¿Confirmación?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Confirmación?": {
+      "main": [
+        [
+          {
+            "node": "Gmail Confirmación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Incompleta?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Incompleta?": {
+      "main": [
+        [
+          {
+            "node": "Gmail Incompleta",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Ilegible?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Ilegible?": {
+      "main": [
+        [
+          {
+            "node": "Gmail Ilegible",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Completa?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Completa?": {
+      "main": [
+        [
+          {
+            "node": "Gmail Completa",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿EPS?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿EPS?": {
+      "main": [
+        [
+          {
+            "node": "Gmail EPS",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿TTHH?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿TTHH?": {
+      "main": [
+        [
+          {
+            "node": "Gmail TTHH",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Extra?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Extra?": {
+      "main": [
+        [
+          {
+            "node": "Gmail Extra",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Recordatorio?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Recordatorio?": {
+      "main": [
+        [
+          {
+            "node": "Gmail Recordatorio",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Alerta Jefe?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Alerta Jefe?": {
+      "main": [
+        [
+          {
+            "node": "Gmail Alerta Jefe",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "v2-profesional",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": []
+}
