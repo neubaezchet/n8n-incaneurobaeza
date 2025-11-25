@@ -15,9 +15,11 @@ services:
       
       # Render Port Configuration
       - key: PORT
-        value: "10000"
+        value: "5678"
       - key: N8N_PORT
-        value: "10000"
+        value: "5678"
+      - key: N8N_LISTEN_ADDRESS
+        value: "0.0.0.0"
       
       # Host Configuration - IMPORTANTE
       - key: N8N_HOST

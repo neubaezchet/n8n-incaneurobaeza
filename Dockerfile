@@ -9,9 +9,9 @@ USER node
 
 WORKDIR /home/node
 
-EXPOSE 10000
+EXPOSE 5678
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT:-10000}/healthz || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://localhost:5678/healthz || exit 1
 
 ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
