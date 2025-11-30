@@ -37,6 +37,10 @@ services:
       - key: TZ
         value: America/Bogota
       
+      # N8N Version
+      - key: N8N_VERSION
+        value: latest
+      
       # Database Configuration (fix deprecation warnings)
       - key: DB_TYPE
         value: sqlite
